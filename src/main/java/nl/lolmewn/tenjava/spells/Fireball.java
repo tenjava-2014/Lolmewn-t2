@@ -53,7 +53,7 @@ public class Fireball implements Spell {
     public List<LearnRequirement> getLearnRequirements() {
         return new ArrayList<LearnRequirement>(){{
             this.add(new LearnRequirement(RequirementType.SCROLL, 10));
-            this.add(new LearnRequirement(RequirementType.ITEMSTACK, new ItemStack(Material.FIREWORK_CHARGE, 3)));
+            this.add(new LearnRequirement(RequirementType.ITEMSTACK, new ItemStack(Material.FIREBALL, 3)));
             this.add(new LearnRequirement(RequirementType.EXP, 8));
         }};
     }

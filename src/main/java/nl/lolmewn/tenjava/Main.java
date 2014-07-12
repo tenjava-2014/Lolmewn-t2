@@ -32,7 +32,7 @@ public class Main extends JavaPlugin {
     @Override
     public void onDisable() {
         for(Player player : this.getServer().getOnlinePlayers()){
-            this.playerManager.savePlayer(player);
+            this.playerManager.savePlayer(player.getUniqueId());
         }
     }
 
