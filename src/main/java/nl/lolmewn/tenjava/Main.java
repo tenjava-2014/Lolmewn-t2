@@ -106,6 +106,7 @@ public class Main extends JavaPlugin {
         this.getApi().registerSpell(new DayTime());
         this.getApi().registerSpell(new Fireball());
         this.getApi().registerSpell(new Weather());
+        this.getSpellManager().loadCustomSpells(this.getConfig());
     }
 
 }

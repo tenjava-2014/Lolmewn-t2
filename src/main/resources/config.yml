@@ -5,3 +5,19 @@ inventory:
 spell:
     weather:
         duration: 600
+        
+custom:
+    NightTime:
+        description:
+        - "&eWhen the sun is no longer bright ..."
+        - "&1... the monsters will rule the night"
+        manacost: 1
+        learnchance: 40
+        forge-req:
+        - SCROLL 5
+        - ITEMSTACK ENDER_PEARL 3
+        - EXP 2
+        activate:
+            commands:
+            - time 12000
+            
