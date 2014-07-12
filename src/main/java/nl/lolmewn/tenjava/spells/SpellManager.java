@@ -11,6 +11,7 @@ import nl.lolmewn.tenjava.players.SpellsPlayer;
 import nl.lolmewn.tenjava.spells.req.LearnRequirement;
 import nl.lolmewn.tenjava.spells.req.RequirementType;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -36,7 +37,11 @@ public class SpellManager extends HashMap<String, Spell> {
             Bukkit.getLogger().warning("[Spells] Wrongly configured the " + name + " spell, it doesn't contain either a description, manacost, forge-req, learnchance or activate.");
             return;
         }
-        final List<String> description = sec.getStringList("description");
+
+        final List<String> description = new ArrayList<>();
+        for (String msg : sec.getStringList("description")) {
+            description.add(ChatColor.translateAlternateColorCodes('&', msg));
+        }
         final int manacost = sec.getInt("manacost");
         final int learnchance = sec.getInt("learnchance");
         final List<LearnRequirement> reqs = new ArrayList<>();
@@ -100,7 +105,7 @@ public class SpellManager extends HashMap<String, Spell> {
             @Override
             public void cast(Main main, SpellsPlayer sPlayer) {
                 Player player = main.getServer().getPlayer(sPlayer.getUuid());
-                for(Activatable active : actives){
+                for (Activatable active : actives) {
                     active.activate(player);
                 }
             }
