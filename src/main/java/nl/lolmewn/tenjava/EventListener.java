@@ -1,5 +1,8 @@
 package nl.lolmewn.tenjava;
 
+import nl.lolmewn.tenjava.players.SpellsPlayer;
+import nl.lolmewn.tenjava.spells.Spell;
+import nl.lolmewn.tenjava.spells.SpellType;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
@@ -8,6 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.inventory.ItemStack;
 
 /**
  *
@@ -36,6 +40,27 @@ public class EventListener implements Listener {
         }
         event.getPlayer().openInventory(plugin.getPlayerManager().get(event.getPlayer().getUniqueId()).getSpellInventory().getInventory());
     }
+    
+    @EventHandler
+    public void cast(PlayerInteractEvent event){
+        if(!event.hasItem()){
+            return;
+        }
+        ItemStack stack = event.getItem();
+        if(!stack.getType().equals(Material.ENCHANTED_BOOK)){
+            return;
+        }
+        Spell spell = this.findSpell(stack.getItemMeta().getDisplayName());
+        if(spell == null){
+            return;
+        }
+        SpellsPlayer sp = plugin.getPlayerManager().get(event.getPlayer().getUniqueId());
+        if(!spell.canCast(sp)){
+            event.getPlayer().sendMessage(Messages.getMessage("cannot-cast-spell"));
+            return;
+        }
+        spell.cast(plugin, sp);
+    }
 
     @EventHandler
     public void login(PlayerJoinEvent event){
@@ -44,5 +69,14 @@ public class EventListener implements Listener {
     
     public void quit(PlayerQuitEvent event){
         plugin.getPlayerManager().savePlayer(event.getPlayer().getUniqueId());
+    }
+
+    public Spell findSpell(String itemName) {
+        for (SpellType type : SpellType.values()) {
+            if (type.getSpell().getName().equals(itemName)) {
+                return type.getSpell();
+            }
+        }
+        return null;
     }
 }
