@@ -3,7 +3,6 @@ package nl.lolmewn.tenjava;
 import java.util.Random;
 import nl.lolmewn.tenjava.players.SpellsPlayer;
 import nl.lolmewn.tenjava.spells.Spell;
-import nl.lolmewn.tenjava.spells.SpellType;
 import nl.lolmewn.tenjava.spells.req.LearnRequirement;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -72,9 +71,9 @@ public class SpellLearnListener implements Listener {
     }
 
     public Spell findSpell(String itemName) {
-        for (SpellType type : SpellType.values()) {
-            if (type.getSpell().getName().equals(itemName)) {
-                return type.getSpell();
+        for (Spell spell : this.plugin.getSpellManager().values()) {
+            if (spell.getName().equals(itemName)) {
+                return spell;
             }
         }
         return null;

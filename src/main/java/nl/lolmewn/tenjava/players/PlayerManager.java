@@ -10,7 +10,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import nl.lolmewn.tenjava.Main;
 import nl.lolmewn.tenjava.spells.Spell;
-import nl.lolmewn.tenjava.spells.SpellType;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 /**
@@ -55,9 +54,9 @@ public class PlayerManager extends HashMap<UUID, SpellsPlayer>{
     }
 
     public Spell findSpell(String itemName) {
-        for (SpellType type : SpellType.values()) {
-            if (type.getSpell().getName().equals(itemName)) {
-                return type.getSpell();
+        for (Spell spell : this.plugin.getSpellManager().values()) {
+            if (spell.getName().equals(itemName)) {
+                return spell;
             }
         }
         return null;

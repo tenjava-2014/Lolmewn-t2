@@ -2,7 +2,6 @@ package nl.lolmewn.tenjava;
 
 import nl.lolmewn.tenjava.players.SpellsPlayer;
 import nl.lolmewn.tenjava.spells.Spell;
-import nl.lolmewn.tenjava.spells.SpellType;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
@@ -77,9 +76,9 @@ public class EventListener implements Listener {
     }
 
     public Spell findSpell(String itemName) {
-        for (SpellType type : SpellType.values()) {
-            if (type.getSpell().getName().equals(itemName)) {
-                return type.getSpell();
+        for (Spell spell : this.plugin.getSpellManager().values()) {
+            if (spell.getName().equals(itemName)) {
+                return spell;
             }
         }
         return null;
