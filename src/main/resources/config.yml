@@ -5,8 +5,6 @@ inventory:
 spell:
     weather:
         duration: 600
-    meteorrain:
-        amount: 20
         
 custom:
     NightTime:
