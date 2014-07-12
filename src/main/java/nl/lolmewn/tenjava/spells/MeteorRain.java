@@ -10,7 +10,6 @@ import nl.lolmewn.tenjava.spells.req.RequirementType;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
@@ -53,8 +52,8 @@ public class MeteorRain implements Spell {
             loc.setY(loc.getWorld().getMaxHeight());
             loc.setZ(loc.getZ() + rant.nextDouble() * 100 - 50);
             loc.setDirection(new Vector(rant.nextDouble() * 3 - 1.5, rant.nextDouble() * -5 - 5, rant.nextDouble() * 3 - 1.5));
-            org.bukkit.entity.Fireball fire = (org.bukkit.entity.Fireball) player.getWorld().spawnEntity(loc, EntityType.FIREBALL);
-            fire.setShooter(player);
+            org.bukkit.entity.Fireball fire = (org.bukkit.entity.Fireball) player.launchProjectile(org.bukkit.entity.Fireball.class, loc.getDirection());
+            fire.teleport(loc);
         }
         player.setLevel(player.getLevel() - this.getManacost());
     }
