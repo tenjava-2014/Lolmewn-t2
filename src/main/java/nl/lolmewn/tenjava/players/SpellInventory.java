@@ -26,8 +26,9 @@ public class SpellInventory {
             ItemMeta meta = spellStack.getItemMeta();
             meta.setDisplayName(spell.getName());
             List<String> lore = spell.getLore();
-            lore.add("Learn chance: " + spell.getLearnChance());
-            lore.add("Learn cost: " + getCost(spell));
+            lore.add(ChatColor.YELLOW + "Cast cost: " + ChatColor.BLUE + spell.getManacost() + ChatColor.YELLOW + " mana");
+            lore.add(ChatColor.YELLOW + "Learn chance: " + this.getChanceColor(spell.getLearnChance()) + spell.getLearnChance());
+            lore.add(ChatColor.YELLOW + "Learn cost: " + getCost(spell));
             meta.setLore(lore);
             spellStack.setItemMeta(meta);
             inventory.addItem(spellStack);
@@ -71,5 +72,24 @@ public class SpellInventory {
             }
         }
         return sb.toString();
+    }
+    
+    private ChatColor getChanceColor(int chance){
+        if(chance <= 10){
+            return ChatColor.DARK_RED;
+        }
+        if(chance <= 25){
+            return ChatColor.RED;
+        }
+        if(chance <= 50){
+            return ChatColor.YELLOW;
+        }
+        if(chance <= 75){
+            return ChatColor.GREEN;
+        }
+        if(chance <= 100){
+            return ChatColor.DARK_GREEN;
+        }
+        return ChatColor.BLACK;
     }
 }
