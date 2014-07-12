@@ -25,4 +25,8 @@ public class SpellsPlayer {
         return this.learnt.contains(spell);
     }
 
+    public UUID getUuid() {
+        return uuid;
+    }
+
 }

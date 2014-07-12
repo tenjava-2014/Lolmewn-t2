@@ -1,0 +1,7 @@
+
+inventory:
+    name: "Spell forge"
+
+spell:
+    weather:
+        duration: 600
