@@ -34,7 +34,7 @@ public class SpellLearnListener implements Listener {
         Player player = (Player) event.getWhoClicked();
         SpellsPlayer sp = plugin.getPlayerManager().get(event.getWhoClicked().getUniqueId());
         ItemStack stack = event.getCurrentItem();
-        if (stack == null) {
+        if (stack == null || !stack.hasItemMeta()) {
             return;
         }
         Spell spell = this.findSpell(stack.getItemMeta().getDisplayName());
