@@ -35,4 +35,9 @@ Description
 This plugin implements magical powers from the realms of the End into Minecraft.
 Exp drops are mana which can be used to cast spells.
 Spells can be learnt through making a scroll (paper + nether star in crafting bench),
-then ... this scroll. 
+then going to a sign with [Spell Forge] on the first line, and learning a spell.
+All spells require scrolls, some require extra items and XP levels.  You have a percentage
+chance to learn this spell. If it goes wrong, you receive some damage.
+
+When you've learnt a spell succesfully, you will receive the spell book. Rightclicking with the book
+in your hand will activate the spell (at a mana-cost which is displayed in the lore of the book).
