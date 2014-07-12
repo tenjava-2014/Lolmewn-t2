@@ -46,4 +46,8 @@ public class SpellsPlayer {
         return spellInventory;
     }
 
+    public HashSet<Spell> getKnownSpells() {
+        return this.learnt;
+    }
+
 }
