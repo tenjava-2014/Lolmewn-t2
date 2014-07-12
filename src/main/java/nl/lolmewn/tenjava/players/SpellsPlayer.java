@@ -5,6 +5,7 @@ import java.util.UUID;
 import nl.lolmewn.tenjava.Main;
 import nl.lolmewn.tenjava.SpellInventory;
 import nl.lolmewn.tenjava.spells.Spell;
+import org.bukkit.inventory.ItemStack;
 
 /**
  *
@@ -23,6 +24,14 @@ public class SpellsPlayer {
     
     public void learnSpell(Spell spell){
         this.learnt.add(spell);
+        for(ItemStack stack : spellInventory.getInventory()){
+            if(stack == null){
+                continue;
+            }
+            if(stack.hasItemMeta() && stack.getItemMeta().hasDisplayName() && stack.getItemMeta().getDisplayName().equals(spell.getName())){
+                spellInventory.getInventory().removeItem(stack);
+            }
+        }
     }
     
     public boolean knowsSpell(Spell spell){

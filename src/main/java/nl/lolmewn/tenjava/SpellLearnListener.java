@@ -137,7 +137,7 @@ public class SpellLearnListener implements Listener {
                                 stack.setAmount(stack.getAmount() - required);
                                 required = 0;
                             } else {
-                                stack.setAmount(0);
+                                player.getInventory().removeItem(stack);
                                 required -= stack.getAmount();
                             }
                         }
