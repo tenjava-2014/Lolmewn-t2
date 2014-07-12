@@ -39,26 +39,30 @@ public class EventListener implements Listener {
         }
         event.getPlayer().openInventory(plugin.getPlayerManager().get(event.getPlayer().getUniqueId()).getSpellInventory().getInventory());
     }
-    
+
     @EventHandler
-    public void cast(PlayerInteractEvent event){
-        if(!event.hasItem()){
+    public void cast(PlayerInteractEvent event) {
+        if (!event.hasItem()) {
             return;
         }
         ItemStack stack = event.getItem();
-        if(!stack.getType().equals(Material.ENCHANTED_BOOK)){
+        if (!stack.getType().equals(Material.ENCHANTED_BOOK)) {
             return;
         }
         Spell spell = this.plugin.getApi().getSpell(stack.getItemMeta().getDisplayName());
-        if(spell == null){
+        if (spell == null) {
             return;
         }
         SpellsPlayer sp = plugin.getPlayerManager().get(event.getPlayer().getUniqueId());
-        if(!sp.canCast(spell)){
+        if (!sp.knowsSpell(spell)) {
             event.getPlayer().sendMessage(Messages.getMessage("cannot-cast-spell"));
             return;
         }
-        if(event.getPlayer().getLevel() < spell.getManacost()){
+        if (!sp.canCast(spell)) {
+            event.getPlayer().sendMessage(Messages.getMessage("spell-cooling-down", new Pair("%time%", sp.getSecondsRemaining(spell) + "")));
+            return;
+        }
+        if (event.getPlayer().getLevel() < spell.getManacost()) {
             event.getPlayer().sendMessage(Messages.getMessage("not-enough-mana", new Pair("%req%", spell.getManacost() + "")));
             return;
         }
@@ -66,12 +70,12 @@ public class EventListener implements Listener {
     }
 
     @EventHandler
-    public void login(PlayerJoinEvent event){
+    public void login(PlayerJoinEvent event) {
         plugin.getPlayerManager().loadPlayer(event.getPlayer().getUniqueId());
     }
-    
+
     @EventHandler
-    public void quit(PlayerQuitEvent event){
+    public void quit(PlayerQuitEvent event) {
         plugin.getPlayerManager().savePlayer(event.getPlayer().getUniqueId());
     }
 }

@@ -4,4 +4,5 @@ spell-learnt: "You have succesfully learnt the %spell% spell!"
 not-meets-requirements: "You do not meet the requirements to learn this spell!"
 
 cannot-cast-spell: "You do not know how to cast this spell! Learn it first at a forge"
+spell-cooling-down: "&cSpell is cooling down! Use it again in %time% seconds!"
 not-enough-mana: "You do not have enough mana! Mana needed: %req%"

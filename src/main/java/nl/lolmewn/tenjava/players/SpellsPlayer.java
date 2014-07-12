@@ -46,6 +46,13 @@ public class SpellsPlayer {
         return this.learnt;
     }
     
+    public int getSecondsRemaining(Spell spell){
+        if(!cooldown.containsKey(spell)){
+            return 0;
+        }
+        return (int)((cooldown.get(spell) + spell.getCooldown() * 1000 - System.currentTimeMillis()) / 1000) + 1;
+    }
+    
     public boolean isCoolingDown(Spell spell){
         if(!cooldown.containsKey(spell)){
             return false;
