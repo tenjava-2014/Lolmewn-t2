@@ -11,6 +11,7 @@ public class PlayerManager extends HashMap<UUID, SpellsPlayer>{
     
     public void loadPlayer(UUID uuid){
         //TODO
+        this.put(uuid, new SpellsPlayer(uuid));
     }
     
     public void savePlayer(UUID uuid){
