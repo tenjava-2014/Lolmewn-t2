@@ -36,7 +36,7 @@ public class DayTime implements Spell {
     @Override
     public void cast(Main main, SpellsPlayer sPlayer) {
         Player player = main.getServer().getPlayer(sPlayer.getUuid());
-        player.getWorld().setTime(9000);
+        player.getWorld().setTime(0);
     }
 
     @Override
