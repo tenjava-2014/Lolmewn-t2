@@ -1,7 +1,9 @@
 package nl.lolmewn.tenjava.api;
 
 import nl.lolmewn.tenjava.Main;
+import nl.lolmewn.tenjava.players.SpellsPlayer;
 import nl.lolmewn.tenjava.spells.Spell;
+import org.bukkit.entity.Player;
 
 /**
  *
@@ -31,6 +33,10 @@ public class SpellsAPI {
             }
         }
         return null;
+    }
+    
+    public SpellsPlayer getSpellsPlayer(Player player){
+        return plugin.getPlayerManager().get(player.getUniqueId());
     }
 
 }
