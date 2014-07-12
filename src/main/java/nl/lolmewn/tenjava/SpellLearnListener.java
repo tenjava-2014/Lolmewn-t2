@@ -6,6 +6,7 @@ import nl.lolmewn.tenjava.spells.Spell;
 import nl.lolmewn.tenjava.spells.SpellType;
 import nl.lolmewn.tenjava.spells.req.LearnRequirement;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
@@ -22,6 +23,7 @@ public class SpellLearnListener implements Listener {
         this.plugin = plugin;
     }
 
+    @EventHandler
     public void pickup(InventoryClickEvent event) {
         if (!event.getInventory().getName().equals(plugin.getConfig().getString("inventory.name"))) {
             return;
