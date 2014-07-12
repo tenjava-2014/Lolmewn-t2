@@ -12,7 +12,6 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.util.Vector;
 
 /**
  *
@@ -48,11 +47,9 @@ public class MeteorRain implements Spell {
         while (amount > 0) {
             amount--;
             Location loc = player.getLocation();
-            loc.setX(loc.getX() + rant.nextDouble() * 100 - 50);
             loc.setY(loc.getWorld().getMaxHeight());
-            loc.setZ(loc.getZ() + rant.nextDouble() * 100 - 50);
-            loc.setDirection(new Vector(rant.nextDouble() * 3 - 1.5, rant.nextDouble() * -5 - 5, rant.nextDouble() * 3 - 1.5));
-            org.bukkit.entity.Fireball fire = player.launchProjectile(org.bukkit.entity.SmallFireball.class, loc.getDirection());
+            loc.setPitch(80f);
+            org.bukkit.entity.Fireball fire = player.launchProjectile(org.bukkit.entity.SmallFireball.class);
             fire.setIsIncendiary(true);
             fire.setYield(5);
             fire.teleport(loc);
