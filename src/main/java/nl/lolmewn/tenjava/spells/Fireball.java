@@ -42,7 +42,8 @@ public class Fireball implements Spell {
         loc.add(loc.getDirection().multiply(3));
         org.bukkit.entity.Fireball ball = player.getWorld().spawn(loc, org.bukkit.entity.Fireball.class);
         ball.setYield(0);
-        player.launchProjectile(ball.getClass(), loc.getDirection().multiply(5));
+        player.launchProjectile(ball.getClass(), loc.getDirection().multiply(2));
+        ball.remove();
     }
 
     @Override
