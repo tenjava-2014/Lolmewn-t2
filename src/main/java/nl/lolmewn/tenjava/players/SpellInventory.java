@@ -49,23 +49,25 @@ public class SpellInventory {
             switch (req.getType()) {
                 case EXP:
                     if (!first) {
-                        sb.append("; ");
+                        sb.append(", ");
                     }
                     sb.append((int) req.getValue()).append(" EXP");
                     first = false;
                     break;
                 case ITEMSTACK:
                     if (!first) {
-                        sb.append("; ");
+                        sb.append(", ");
                     }
                     ItemStack stack = (ItemStack) req.getValue();
                     sb.append(stack.getAmount()).append(" ").append(stack.getType().name().toLowerCase());
+                    first = false;
                     break;
                 case SCROLL:
                     if (!first) {
-                        sb.append("; ");
+                        sb.append(", ");
                     }
                     sb.append((int) req.getValue()).append(" scrolls");
+                    first = false;
             }
         }
         return sb.toString();
