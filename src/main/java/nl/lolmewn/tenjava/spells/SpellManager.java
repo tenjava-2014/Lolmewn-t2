@@ -7,6 +7,7 @@ import nl.lolmewn.tenjava.Main;
 import nl.lolmewn.tenjava.custom.Activatable;
 import nl.lolmewn.tenjava.custom.ActivatableBroadcast;
 import nl.lolmewn.tenjava.custom.ActivatableCommand;
+import nl.lolmewn.tenjava.custom.ActivatableConsoleCommand;
 import nl.lolmewn.tenjava.players.SpellsPlayer;
 import nl.lolmewn.tenjava.spells.req.LearnRequirement;
 import nl.lolmewn.tenjava.spells.req.RequirementType;
@@ -81,6 +82,11 @@ public class SpellManager extends HashMap<String, Spell> {
                 case "broadcast":
                     for (String message : sec.getStringList("activate.broadcast")) {
                         actives.add(new ActivatableBroadcast(message));
+                    }
+                    break;
+                case "console":
+                    for (String command : sec.getStringList("activate.console")) {
+                        actives.add(new ActivatableConsoleCommand(command));
                     }
             }
         }
