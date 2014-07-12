@@ -43,9 +43,12 @@ public class SpellLearnListener implements Listener {
             return;
         }
         if (sp.knowsSpell(spell)) {
-            player.sendMessage(Messages.getMessage("already-know-spell"));
             event.setCancelled(true);
-            player.closeInventory();
+            if (!player.getInventory().contains(stack)) {
+                player.getInventory().addItem(stack);
+            } else {
+                player.sendMessage(Messages.getMessage("already-know-spell"));
+            }
             return;
         }
         if (!hasRequirements(player, spell)) {
@@ -60,7 +63,7 @@ public class SpellLearnListener implements Listener {
             player.sendMessage(Messages.getMessage("spell-learning-failed"));
             event.setCancelled(true);
             player.closeInventory();
-        }else{
+        } else {
             player.sendMessage(Messages.getMessage("spell-learnt", new Pair("%spell%", spell.getName())));
             event.setCancelled(true);
             player.closeInventory();
@@ -95,11 +98,11 @@ public class SpellLearnListener implements Listener {
                     }
                     break;
                 case ITEMSTACK:
-                    
+
                     ItemStack item = (ItemStack) req.getValue();
                     int left = item.getAmount();
                     for (ItemStack stack : player.getInventory().getContents()) {
-                        if(stack == null){
+                        if (stack == null) {
                             continue;
                         }
                         if (stack.getType().equals(item.getType())) {
@@ -113,7 +116,7 @@ public class SpellLearnListener implements Listener {
                 case SCROLL:
                     int required = (int) req.getValue();
                     for (ItemStack stack : player.getInventory().getContents()) {
-                        if(stack == null){
+                        if (stack == null) {
                             continue;
                         }
                         if (stack.hasItemMeta() && stack.getItemMeta().getDisplayName().equals("Magical scroll")) {
@@ -140,7 +143,7 @@ public class SpellLearnListener implements Listener {
                 case SCROLL:
                     int required = (int) req.getValue();
                     for (ItemStack stack : player.getInventory().getContents()) {
-                        if(stack == null){
+                        if (stack == null) {
                             continue;
                         }
                         if (stack.hasItemMeta() && stack.getItemMeta().getDisplayName().equals("Magical scroll")) {
