@@ -6,7 +6,8 @@ package nl.lolmewn.tenjava.spells;
  */
 public enum SpellType {
 
-    WEATHER(new Weather());
+    WEATHER(new Weather()),
+    FIREBALL(new Fireball());
 
     private final Spell spell;
 
