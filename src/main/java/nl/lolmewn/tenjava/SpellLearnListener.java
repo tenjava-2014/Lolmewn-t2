@@ -44,18 +44,27 @@ public class SpellLearnListener implements Listener {
         }
         if (sp.knowsSpell(spell)) {
             player.sendMessage(Messages.getMessage("already-know-spell"));
+            event.setCancelled(true);
+            player.closeInventory();
             return;
         }
         if (!hasRequirements(player, spell)) {
             player.sendMessage(Messages.getMessage("not-meets-requirements"));
+            event.setCancelled(true);
+            player.closeInventory();
             return;
         }
         takeRequirements(player, spell);
         if (!learnSpell(sp, spell)) {
             player.damage(1);
             player.sendMessage(Messages.getMessage("spell-learning-failed"));
+            event.setCancelled(true);
+            player.closeInventory();
         }else{
             player.sendMessage(Messages.getMessage("spell-learnt", new Pair("%spell%", spell.getName())));
+            event.setCancelled(true);
+            player.closeInventory();
+            player.getInventory().addItem(stack);
         }
     }
 

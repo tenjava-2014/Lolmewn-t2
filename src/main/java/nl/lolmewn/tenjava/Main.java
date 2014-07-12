@@ -17,7 +17,7 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         this.checkFiles();
-        this.playerManager = new PlayerManager();
+        this.playerManager = new PlayerManager(this);
         this.createRecipe();
         new Messages(YamlConfiguration.loadConfiguration(new File(this.getDataFolder(), "messages.yml")));
         this.getServer().getPluginManager().registerEvents(new EventListener(this), this);

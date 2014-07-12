@@ -34,7 +34,7 @@ public class EventListener implements Listener {
         if (!sign.getLine(0).equalsIgnoreCase("[learn magic]")) {
             return;
         }
-        event.getPlayer().openInventory(new SpellInventory(plugin, event.getPlayer()).getInventory());
+        event.getPlayer().openInventory(plugin.getPlayerManager().get(event.getPlayer().getUniqueId()).getSpellInventory().getInventory());
     }
 
     @EventHandler
