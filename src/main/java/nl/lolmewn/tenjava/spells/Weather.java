@@ -42,8 +42,8 @@ public class Weather implements Spell {
     @Override
     public List<String> getLore() {
         return new ArrayList<String>(){{
-            this.add(ChatColor.YELLOW + "Make the sun shine!");
-            this.add(ChatColor.YELLOW + "Cost: " + ChatColor.BLUE + getManacost() + ChatColor.YELLOW + " mana");
+            this.add(ChatColor.BLUE + "Stop the thunder and the rain...");
+            this.add(ChatColor.YELLOW + "and let the sun shine again!");
         }};
     }
 
