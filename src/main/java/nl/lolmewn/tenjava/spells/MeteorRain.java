@@ -52,7 +52,9 @@ public class MeteorRain implements Spell {
             loc.setY(loc.getWorld().getMaxHeight());
             loc.setZ(loc.getZ() + rant.nextDouble() * 100 - 50);
             loc.setDirection(new Vector(rant.nextDouble() * 3 - 1.5, rant.nextDouble() * -5 - 5, rant.nextDouble() * 3 - 1.5));
-            org.bukkit.entity.Fireball fire = (org.bukkit.entity.Fireball) player.launchProjectile(org.bukkit.entity.Fireball.class, loc.getDirection());
+            org.bukkit.entity.Fireball fire = player.launchProjectile(org.bukkit.entity.SmallFireball.class, loc.getDirection());
+            fire.setIsIncendiary(true);
+            fire.setYield(5);
             fire.teleport(loc);
         }
         player.setLevel(player.getLevel() - this.getManacost());
