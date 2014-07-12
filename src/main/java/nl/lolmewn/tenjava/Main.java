@@ -9,6 +9,7 @@ import nl.lolmewn.tenjava.api.SpellsAPI;
 import nl.lolmewn.tenjava.players.PlayerManager;
 import nl.lolmewn.tenjava.spells.DayTime;
 import nl.lolmewn.tenjava.spells.Fireball;
+import nl.lolmewn.tenjava.spells.MeteorRain;
 import nl.lolmewn.tenjava.spells.SpellManager;
 import nl.lolmewn.tenjava.spells.Weather;
 import org.bukkit.Material;
@@ -106,6 +107,7 @@ public class Main extends JavaPlugin {
         this.getApi().registerSpell(new DayTime());
         this.getApi().registerSpell(new Fireball());
         this.getApi().registerSpell(new Weather());
+        this.getApi().registerSpell(new MeteorRain());
         this.getSpellManager().loadCustomSpells(this.getConfig());
     }
 
