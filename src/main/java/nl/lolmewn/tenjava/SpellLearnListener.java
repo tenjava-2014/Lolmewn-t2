@@ -156,7 +156,7 @@ public class SpellLearnListener implements Listener {
 
     private ItemStack removeLastThreeLore(ItemStack stack) {
         ItemMeta meta = stack.getItemMeta();
-        meta.setLore(meta.getLore().subList(0, meta.getLore().size() - 3));
+        meta.setLore(meta.getLore().subList(0, meta.getLore().size() - 2));
         stack.setItemMeta(meta);
         return stack;
     }
