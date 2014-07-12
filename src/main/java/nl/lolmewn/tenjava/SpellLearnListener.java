@@ -44,8 +44,8 @@ public class SpellLearnListener implements Listener {
         }
         if (sp.knowsSpell(spell)) {
             event.setCancelled(true);
-            if (!player.getInventory().contains(removeLastThreeLore(stack))) {
-                player.getInventory().addItem(removeLastThreeLore(stack));
+            if (!player.getInventory().contains(removeLastTwoLore(stack))) {
+                player.getInventory().addItem(removeLastTwoLore(stack));
             } else {
                 player.sendMessage(Messages.getMessage("already-know-spell"));
             }
@@ -67,7 +67,7 @@ public class SpellLearnListener implements Listener {
             player.sendMessage(Messages.getMessage("spell-learnt", new Pair("%spell%", spell.getName())));
             event.setCancelled(true);
             player.closeInventory();
-            player.getInventory().addItem(removeLastThreeLore(stack));
+            player.getInventory().addItem(removeLastTwoLore(stack));
         }
     }
 
@@ -154,7 +154,10 @@ public class SpellLearnListener implements Listener {
         }
     }
 
-    private ItemStack removeLastThreeLore(ItemStack stack) {
+    private ItemStack removeLastTwoLore(ItemStack stack) {
+        if(!stack.getItemMeta().getLore().get(stack.getItemMeta().getLore().size() - 1).contains("Learn cost")){
+            return stack;
+        }
         ItemMeta meta = stack.getItemMeta();
         meta.setLore(meta.getLore().subList(0, meta.getLore().size() - 2));
         stack.setItemMeta(meta);
