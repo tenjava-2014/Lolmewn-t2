@@ -36,7 +36,7 @@ public class SpellLearnListener implements Listener {
         if (stack == null || !stack.hasItemMeta() || !stack.getItemMeta().hasDisplayName()) {
             return;
         }
-        Spell spell = this.findSpell(stack.getItemMeta().getDisplayName());
+        Spell spell = this.plugin.getApi().getSpell(stack.getItemMeta().getDisplayName());
         if (spell == null) {
             plugin.getLogger().info("Spell not found, but is in inventory: " + stack.getItemMeta().getDisplayName());
             return;
@@ -68,15 +68,6 @@ public class SpellLearnListener implements Listener {
             player.closeInventory();
             player.getInventory().addItem(stack);
         }
-    }
-
-    public Spell findSpell(String itemName) {
-        for (Spell spell : this.plugin.getSpellManager().values()) {
-            if (spell.getName().equals(itemName)) {
-                return spell;
-            }
-        }
-        return null;
     }
 
     public boolean learnSpell(SpellsPlayer player, Spell spell) {

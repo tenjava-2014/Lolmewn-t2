@@ -30,7 +30,7 @@ public class PlayerManager extends HashMap<UUID, SpellsPlayer>{
         this.put(uuid, new SpellsPlayer(plugin, uuid));
         if(config.contains(uuid.toString())){
             for(String itemName : config.getStringList(uuid.toString() + ".unlocked")){
-                Spell spell = this.findSpell(itemName);
+                Spell spell = this.plugin.getApi().getSpell(itemName);
                 if(spell == null){
                     continue;
                 }
@@ -51,15 +51,6 @@ public class PlayerManager extends HashMap<UUID, SpellsPlayer>{
         } catch (IOException ex) {
             Logger.getLogger(PlayerManager.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    public Spell findSpell(String itemName) {
-        for (Spell spell : this.plugin.getSpellManager().values()) {
-            if (spell.getName().equals(itemName)) {
-                return spell;
-            }
-        }
-        return null;
     }
 
 }

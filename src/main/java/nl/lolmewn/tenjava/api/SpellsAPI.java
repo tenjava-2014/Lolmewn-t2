@@ -8,15 +8,29 @@ import nl.lolmewn.tenjava.spells.Spell;
  * @author Lolmewn
  */
 public class SpellsAPI {
-    
+
     private final Main plugin;
 
     public SpellsAPI(Main main) {
         this.plugin = main;
     }
-    
-    public void registerSpell(Spell spell){
+
+    public void registerSpell(Spell spell) {
         plugin.getSpellManager().put(spell.getName(), spell);
+    }
+
+    /**
+     * Find a spell with the given name
+     * @param name Name of the spell to look for
+     * @return The spell associated with the given name, null if no such spell exists
+     */
+    public Spell getSpell(String name) {
+        for (Spell spell : this.plugin.getSpellManager().values()) {
+            if (spell.getName().equals(name)) {
+                return spell;
+            }
+        }
+        return null;
     }
 
 }

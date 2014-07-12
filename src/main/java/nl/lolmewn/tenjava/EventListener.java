@@ -49,7 +49,7 @@ public class EventListener implements Listener {
         if(!stack.getType().equals(Material.ENCHANTED_BOOK)){
             return;
         }
-        Spell spell = this.findSpell(stack.getItemMeta().getDisplayName());
+        Spell spell = this.plugin.getApi().getSpell(stack.getItemMeta().getDisplayName());
         if(spell == null){
             return;
         }
@@ -73,14 +73,5 @@ public class EventListener implements Listener {
     @EventHandler
     public void quit(PlayerQuitEvent event){
         plugin.getPlayerManager().savePlayer(event.getPlayer().getUniqueId());
-    }
-
-    public Spell findSpell(String itemName) {
-        for (Spell spell : this.plugin.getSpellManager().values()) {
-            if (spell.getName().equals(itemName)) {
-                return spell;
-            }
-        }
-        return null;
     }
 }
