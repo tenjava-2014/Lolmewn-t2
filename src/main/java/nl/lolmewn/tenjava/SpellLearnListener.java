@@ -95,7 +95,18 @@ public class SpellLearnListener implements Listener {
                     }
                     break;
                 case ITEMSTACK:
-                    if (!player.getInventory().contains((ItemStack) req.getValue())) {
+                    
+                    ItemStack item = (ItemStack) req.getValue();
+                    int left = item.getAmount();
+                    for (ItemStack stack : player.getInventory().getContents()) {
+                        if(stack == null){
+                            continue;
+                        }
+                        if (stack.getType().equals(item.getType())) {
+                            left -= stack.getAmount();
+                        }
+                    }
+                    if (left > 0) {
                         return false;
                     }
                     break;
