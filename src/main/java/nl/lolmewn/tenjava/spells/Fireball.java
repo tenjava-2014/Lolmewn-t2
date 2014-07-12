@@ -9,7 +9,6 @@ import nl.lolmewn.tenjava.spells.req.RequirementType;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -41,8 +40,8 @@ public class Fireball implements Spell {
         Player player = main.getServer().getPlayer(sPlayer.getUuid());
         Location loc = player.getLocation();
         loc.add(loc.getDirection().multiply(3));
-        loc.setDirection(loc.getDirection().multiply(5));
-        player.getWorld().spawnEntity(loc, EntityType.SMALL_FIREBALL);
+        org.bukkit.entity.Fireball ball = player.getWorld().spawn(loc, org.bukkit.entity.Fireball.class);
+        player.launchProjectile(ball.getClass(), loc.getDirection().multiply(5));
     }
 
     @Override
