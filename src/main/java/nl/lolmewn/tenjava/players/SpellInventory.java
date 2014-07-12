@@ -1,6 +1,7 @@
-package nl.lolmewn.tenjava;
+package nl.lolmewn.tenjava.players;
 
 import java.util.List;
+import nl.lolmewn.tenjava.Main;
 import nl.lolmewn.tenjava.spells.SpellType;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
