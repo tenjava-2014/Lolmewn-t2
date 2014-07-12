@@ -25,9 +25,11 @@ public class Fireball implements Spell {
 
     @Override
     public List<String> getLore() {
-        return new ArrayList<String>(){{
-            this.add(ChatColor.YELLOW + "Set things " + ChatColor.RED + "ON FIRE!");
-        }};
+        return new ArrayList<String>() {
+            {
+                this.add(ChatColor.YELLOW + "Set things " + ChatColor.RED + "ON FIRE!");
+            }
+        };
     }
 
     @Override
@@ -42,6 +44,7 @@ public class Fireball implements Spell {
         org.bukkit.entity.Fireball ball = player.launchProjectile(org.bukkit.entity.SmallFireball.class, loc.getDirection().multiply(3));
         ball.setIsIncendiary(true);
         player.setLevel(player.getLevel() - this.getManacost());
+        sPlayer.cooldown(this);
     }
 
     @Override
@@ -51,11 +54,18 @@ public class Fireball implements Spell {
 
     @Override
     public List<LearnRequirement> getLearnRequirements() {
-        return new ArrayList<LearnRequirement>(){{
-            this.add(new LearnRequirement(RequirementType.SCROLL, 10));
-            this.add(new LearnRequirement(RequirementType.ITEMSTACK, new ItemStack(Material.FIREBALL, 3)));
-            this.add(new LearnRequirement(RequirementType.EXP, 8));
-        }};
+        return new ArrayList<LearnRequirement>() {
+            {
+                this.add(new LearnRequirement(RequirementType.SCROLL, 10));
+                this.add(new LearnRequirement(RequirementType.ITEMSTACK, new ItemStack(Material.FIREBALL, 3)));
+                this.add(new LearnRequirement(RequirementType.EXP, 8));
+            }
+        };
+    }
+
+    @Override
+    public int getCooldown() {
+        return 5;
     }
 
 }

@@ -34,8 +34,14 @@ public class SpellManager extends HashMap<String, Spell> {
     }
 
     public void loadCustomSpell(final String name, ConfigurationSection sec) {
-        if (!sec.contains("description") || !sec.contains("manacost") || !sec.contains("forge-req") || !sec.contains("activate") || !sec.contains("learnchance")) {
-            Bukkit.getLogger().warning("[Spells] Wrongly configured the " + name + " spell, it doesn't contain either a description, manacost, forge-req, learnchance or activate.");
+        if (!sec.contains("description")
+                || !sec.contains("manacost")
+                || !sec.contains("forge-req")
+                || !sec.contains("activate")
+                || !sec.contains("learnchance")
+                || !sec.contains("cooldown")) {
+            Bukkit.getLogger().warning("[Spells] Wrongly configured the " + name
+                    + " spell, it doesn't contain either a description, manacost, forge-req, learnchance, cooldown or activate.");
             return;
         }
 
@@ -45,6 +51,7 @@ public class SpellManager extends HashMap<String, Spell> {
         }
         final int manacost = sec.getInt("manacost");
         final int learnchance = sec.getInt("learnchance");
+        final int cooldown = sec.getInt("cooldown");
         final List<LearnRequirement> reqs = new ArrayList<>();
         for (String req : sec.getStringList("forge-req")) {
             String[] sp = req.split(" ");
@@ -114,6 +121,8 @@ public class SpellManager extends HashMap<String, Spell> {
                 for (Activatable active : actives) {
                     active.activate(player);
                 }
+                player.setLevel(player.getLevel() - this.getManacost());
+                sPlayer.cooldown(this);
             }
 
             @Override
@@ -124,6 +133,11 @@ public class SpellManager extends HashMap<String, Spell> {
             @Override
             public List<LearnRequirement> getLearnRequirements() {
                 return reqs;
+            }
+
+            @Override
+            public int getCooldown() {
+                return cooldown;
             }
         });
     }

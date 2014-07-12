@@ -54,7 +54,7 @@ public class EventListener implements Listener {
             return;
         }
         SpellsPlayer sp = plugin.getPlayerManager().get(event.getPlayer().getUniqueId());
-        if(!sp.knowsSpell(spell)){
+        if(!sp.canCast(spell)){
             event.getPlayer().sendMessage(Messages.getMessage("cannot-cast-spell"));
             return;
         }

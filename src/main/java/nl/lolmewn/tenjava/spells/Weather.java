@@ -37,6 +37,7 @@ public class Weather implements Spell {
         player.getWorld().setThundering(false);
         player.getWorld().setWeatherDuration(main.getConfig().getInt("spell.weather.duration", 600) * 20);
         player.setLevel(player.getLevel() - this.getManacost());
+        sPlayer.cooldown(this);
     }
 
     @Override
@@ -53,6 +54,11 @@ public class Weather implements Spell {
             this.add(new LearnRequirement(RequirementType.SCROLL, 3));
             this.add(new LearnRequirement(RequirementType.EXP, 1));
         }};
+    }
+
+    @Override
+    public int getCooldown() {
+        return 800;
     }
 
 }

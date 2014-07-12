@@ -1,5 +1,6 @@
 package nl.lolmewn.tenjava.players;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.UUID;
 import nl.lolmewn.tenjava.Main;
@@ -13,6 +14,7 @@ public class SpellsPlayer {
     
     private final UUID uuid;
     private final HashSet<Spell> learnt = new HashSet<>();
+    private final HashMap<Spell, Long> cooldown = new HashMap<>();
     private final SpellInventory spellInventory;
     
     public SpellsPlayer(Main plugin, UUID uuid) {
@@ -27,6 +29,10 @@ public class SpellsPlayer {
     public boolean knowsSpell(Spell spell){
         return this.learnt.contains(spell);
     }
+    
+    public boolean canCast(Spell spell){
+        return knowsSpell(spell) && !this.isCoolingDown(spell);
+    }
 
     public UUID getUuid() {
         return uuid;
@@ -38,6 +44,17 @@ public class SpellsPlayer {
 
     public HashSet<Spell> getKnownSpells() {
         return this.learnt;
+    }
+    
+    public boolean isCoolingDown(Spell spell){
+        if(!cooldown.containsKey(spell)){
+            return false;
+        }
+        return cooldown.get(spell) + spell.getCooldown() * 1000 - System.currentTimeMillis() >= 0;
+    }
+    
+    public void cooldown(Spell spell){
+        this.cooldown.put(spell, System.currentTimeMillis());
     }
 
 }

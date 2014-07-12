@@ -22,10 +22,12 @@ public class Heal implements Spell {
 
     @Override
     public List<String> getLore() {
-        return new ArrayList<String>(){{
-            this.add(ChatColor.RED + "To stop all the bleed...");
-            this.add(ChatColor.GREEN + "... a heal is all you need!");
-        }};
+        return new ArrayList<String>() {
+            {
+                this.add(ChatColor.RED + "To stop all the bleed...");
+                this.add(ChatColor.GREEN + "... a heal is all you need!");
+            }
+        };
     }
 
     @Override
@@ -37,6 +39,8 @@ public class Heal implements Spell {
     public void cast(Main main, SpellsPlayer player) {
         Player p = main.getServer().getPlayer(player.getUuid());
         p.setHealth(p.getMaxHealth());
+        p.setLevel(p.getLevel() - this.getManacost());
+        player.cooldown(this);
     }
 
     @Override
@@ -46,9 +50,16 @@ public class Heal implements Spell {
 
     @Override
     public List<LearnRequirement> getLearnRequirements() {
-        return new ArrayList<LearnRequirement>(){{
-            this.add(new LearnRequirement(RequirementType.SCROLL, 5));
-        }};
+        return new ArrayList<LearnRequirement>() {
+            {
+                this.add(new LearnRequirement(RequirementType.SCROLL, 5));
+            }
+        };
+    }
+
+    @Override
+    public int getCooldown() {
+        return 60;
     }
 
 }

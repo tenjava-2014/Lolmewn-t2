@@ -37,6 +37,8 @@ public class Feed implements Spell {
     public void cast(Main main, SpellsPlayer player) {
         Player p = main.getServer().getPlayer(player.getUuid());
         p.setFoodLevel(20);
+        p.setLevel(p.getLevel() - this.getManacost());
+        player.cooldown(this);
     }
 
     @Override
@@ -49,6 +51,11 @@ public class Feed implements Spell {
         return new ArrayList<LearnRequirement>(){{
             this.add(new LearnRequirement(RequirementType.SCROLL, 5));
         }};
+    }
+
+    @Override
+    public int getCooldown() {
+        return 60;
     }
 
 }

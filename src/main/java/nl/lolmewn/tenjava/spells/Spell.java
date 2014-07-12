@@ -34,6 +34,12 @@ public interface Spell {
     public int getManacost();
     
     /**
+     * Gets the cooldown period the player gets after casting this spell
+     * @return cooldown period in seconds
+     */
+    public int getCooldown();
+    
+    /**
      * Casts this spell
      * 
      * @param main Main instance of this plugin
@@ -48,6 +54,11 @@ public interface Spell {
      */
     public int getLearnChance();
     
+    /**
+     * Gets a list of all requirements you need to learn this spell. If you don't have
+     * all requirements, you cannot learn this spell.
+     * @return List of LearnRequirements
+     */
     public List<LearnRequirement> getLearnRequirements();
 
 }

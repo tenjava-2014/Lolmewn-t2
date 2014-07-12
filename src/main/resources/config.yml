@@ -14,6 +14,7 @@ custom:
         - "&eWhen the sun is no longer bright ..."
         - "&1... the monsters will rule the night"
         manacost: 1
+        cooldown: 60
         learnchance: 40
         forge-req:
         - SCROLL 5

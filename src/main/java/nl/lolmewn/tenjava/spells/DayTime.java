@@ -38,6 +38,7 @@ public class DayTime implements Spell {
         Player player = main.getServer().getPlayer(sPlayer.getUuid());
         player.getWorld().setTime(0);
         player.setLevel(player.getLevel() - this.getManacost());
+        sPlayer.cooldown(this);
     }
 
     @Override
@@ -50,6 +51,11 @@ public class DayTime implements Spell {
         return new ArrayList<LearnRequirement>(){{
             this.add(new LearnRequirement(RequirementType.SCROLL, 25));
         }};
+    }
+
+    @Override
+    public int getCooldown() {
+        return 720;
     }
 
 }
