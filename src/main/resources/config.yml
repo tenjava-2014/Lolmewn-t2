@@ -19,5 +19,5 @@ custom:
         - EXP 2
         activate:
             commands:
-            - time 12000
+            - time set 12000
             
