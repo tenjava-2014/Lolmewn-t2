@@ -40,6 +40,7 @@ public class Fireball implements Spell {
     public void cast(Main main, SpellsPlayer sPlayer) {
         Player player = main.getServer().getPlayer(sPlayer.getUuid());
         Location loc = player.getLocation();
+        loc.add(loc.getDirection().multiply(3));
         loc.setDirection(loc.getDirection().multiply(5));
         player.getWorld().spawnEntity(loc, EntityType.SMALL_FIREBALL);
     }
