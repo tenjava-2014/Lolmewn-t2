@@ -27,7 +27,7 @@ public class SpellInventory {
             lore.add("Learn chance: " + type.getSpell().getLearnChance());
             meta.setLore(lore);
             spellStack.setItemMeta(meta);
-            inventory.all(spellStack);
+            inventory.addItem(spellStack);
         }
     }
 
