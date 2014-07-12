@@ -2,3 +2,5 @@ already-know-spell: "You already know this spell!"
 spell-learning-failed: "Spell learning failed!"
 spell-learnt: "You have succesfully learnt the %spell% spell!"
 not-meets-requirements: "You do not meet the requirements to learn this spell!"
+
+cannot-cast-spell: "You do not know how to cast this spell! Learn it first at a forge"

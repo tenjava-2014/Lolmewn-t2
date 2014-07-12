@@ -16,11 +16,6 @@ import org.bukkit.entity.Player;
 public class Weather implements Spell {
 
     @Override
-    public boolean canCast(SpellsPlayer player) {
-        return player.knowsSpell(this);
-    }
-
-    @Override
     public int getLearnChance() {
         return 95;
     }

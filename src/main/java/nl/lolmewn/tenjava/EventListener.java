@@ -55,8 +55,12 @@ public class EventListener implements Listener {
             return;
         }
         SpellsPlayer sp = plugin.getPlayerManager().get(event.getPlayer().getUniqueId());
-        if(!spell.canCast(sp)){
+        if(!sp.knowsSpell(spell)){
             event.getPlayer().sendMessage(Messages.getMessage("cannot-cast-spell"));
+            return;
+        }
+        if(event.getPlayer().getLevel() < spell.getManacost()){
+            event.getPlayer().sendMessage(Messages.getMessage("not-enough-mana", new Pair("%req%", spell.getManacost() + "")));
             return;
         }
         spell.cast(plugin, sp);
@@ -67,6 +71,7 @@ public class EventListener implements Listener {
         plugin.getPlayerManager().loadPlayer(event.getPlayer().getUniqueId());
     }
     
+    @EventHandler
     public void quit(PlayerQuitEvent event){
         plugin.getPlayerManager().savePlayer(event.getPlayer().getUniqueId());
     }

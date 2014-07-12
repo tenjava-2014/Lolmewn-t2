@@ -32,14 +32,6 @@ public interface Spell {
      * @return manacost for this spell
      */
     public int getManacost();
-
-    /**
-     * Checks whether or not a player can cast this spell
-     *
-     * @param player SpellsPlayer to check for
-     * @return true if the player can, otherwise false
-     */
-    public boolean canCast(SpellsPlayer player);
     
     /**
      * Casts this spell

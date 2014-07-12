@@ -1,10 +1,14 @@
 package nl.lolmewn.tenjava;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import nl.lolmewn.tenjava.players.PlayerManager;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -18,6 +22,7 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         this.checkFiles();
         this.playerManager = new PlayerManager(this);
+        this.loadOnlinePlayers();
         this.createRecipe();
         new Messages(YamlConfiguration.loadConfiguration(new File(this.getDataFolder(), "messages.yml")));
         this.getServer().getPluginManager().registerEvents(new EventListener(this), this);
@@ -26,7 +31,7 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onDisable() {
-
+        
     }
 
     private void createRecipe() {
@@ -51,7 +56,24 @@ public class Main extends JavaPlugin {
 
     private void checkFiles() {
         this.saveDefaultConfig();
-        this.saveResource("messages.yml", false);
+        File msg = new File(this.getDataFolder(), "messages.yml");
+        if (!msg.exists()) {
+            this.saveResource("messages.yml", false);
+        }
+        File user = new File(this.getDataFolder(), "users.yml");
+        if (!user.exists()) {
+            try {
+                user.createNewFile();
+            } catch (IOException ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    private void loadOnlinePlayers() {
+        for(Player player : this.getServer().getOnlinePlayers()){
+            this.getPlayerManager().loadPlayer(player.getUniqueId());
+        }
     }
 
 }
